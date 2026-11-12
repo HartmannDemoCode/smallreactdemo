@@ -17,21 +17,30 @@ export default App
 // ####################################################################
 
 const Input = ({person, setPerson}) => { 
-  const [localInputValue, setLocalInputValue] = useState("");
+  const [localInputValue, setLocalInputValue] = useState({name:"",age:""});
+
   const handleChange = (evt) => {
     const val = evt.target.value
-    console.log(val)
-    setLocalInputValue(val);
+
+    // console.log(val)
+    // setLocalInputValue(val);
+
+    const targetName = evt.target.name;
+    console.log(targetName);
+    setLocalInputValue({...localInputValue, [targetName]:val});
+
   }
 
   const handleClick = () => {
-    setPerson({...person, name:localInputValue});
+    // setPerson({...person, name:localInputValue});
+    setPerson({...localInputValue})
   }
 
   return (
   <>
   <p>Inside Input</p>
-  <input type="text" placeholder="skrive her" value={localInputValue} onChange={handleChange}/>
+  <input type="text" name="name" placeholder="skrive navn her" value={localInputValue.name} onChange={handleChange}/>
+  <input type="text" name="age" placeholder="skrive alder her" value={localInputValue.age} onChange={handleChange}/>
   <button onClick={handleClick}>Send input text</button>
   </>
 )
